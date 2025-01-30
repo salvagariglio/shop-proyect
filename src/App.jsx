@@ -6,15 +6,16 @@ import Cart from './pages/Cart'
 import Shop from './pages/Shop'
 import DeliveryPage from './pages/DeliveryPage'
 import {
-        createBrowserRouter,
-        Outlet,
-        RouterProvider,
-        ScrollRestoration
-      } from 'react-router-dom'
-import {productsData} from './api/Api' 
+  createBrowserRouter,
+  Outlet,
+  RouterProvider,
+  ScrollRestoration
+} from 'react-router-dom'
+import { productsData } from './api/Api'
+import UserPage from './pages/UserPage'
 
 const Layout = () => {
-  return(
+  return (
     <>
       <Header />
       <ScrollRestoration />
@@ -26,31 +27,35 @@ const Layout = () => {
 
 const router = createBrowserRouter([
   {
-    path:"/",
+    path: "/",
     element: <Layout />,
     children: [
       {
-        path:"/",
+        path: "/",
         element: <Home />,
         loader: productsData,
       },
       {
-        path:"/product/:id",
+        path: "/product/:id",
         element: <Product />
       },
       {
-        path:"/shop",
+        path: "/shop",
         element: <Shop />,
         loader: productsData
       },
       {
-        path:"/delivery",
+        path: "/delivery",
         element: <DeliveryPage />,
       },
       {
-        path:"/cart",
+        path: "/cart",
         element: <Cart />,
       },
+      {
+        path: "/user",
+        element: <UserPage />,
+      }
     ],
   },
 ])

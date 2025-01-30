@@ -1,25 +1,25 @@
 import React from 'react'
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import Products from '../components/Products'
 import Discounts from '../components/Discounts'
 
 const Shop = () => {
 
-    const [products, setProducts]= useState([])
-    
+    const [products, setProducts] = useState([])
+
     const data = useLoaderData()
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         if (data && data.data) {
             setProducts(data.data)
         }
-        }, [data])
+    }, [data])
 
     return (
         <div>
             <Discounts />
-            <Products products={products}  />
+            <Products products={products} />
         </div>
     )
 }
