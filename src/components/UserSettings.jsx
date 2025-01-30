@@ -19,7 +19,7 @@ const UserSettings = () => {
     };
 
     return (
-        <div className="flex flex-col md:flex-row p-6 gap-6">
+        <div className="flex flex-col md:flex-row pt-6 pb-14 p-6 gap-6">
             <div className="md:w-1/4 bg-gray-100 p-4 rounded-lg shadow-lg">
                 <ul className="space-y-4">
                     <li className="flex items-center text-lg text-gray-700 hover:text-yellow-600 cursor-pointer">

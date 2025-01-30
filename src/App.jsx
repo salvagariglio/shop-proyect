@@ -51,6 +51,7 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+        loader: productsData
       },
       {
         path: "/user",

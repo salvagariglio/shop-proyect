@@ -26,14 +26,10 @@ const Header = () => {
                             Delivery
                         </Link>
                         <Link to='/cart' >
-                            <div className='relative'>
-                                <img className='w-6' src={car} alt='shop car'></img>
-                            </div>
+                            <img className='w-6' src={car} alt='shop car'></img>
                         </Link >
                         <Link to='/user' >
-                            <div className='relative'>
-                                <img className='w-4 p-0' src={userLogo} alt='user'></img>
-                            </div>
+                            <img className='w-4 p-0' src={userLogo} alt='user'></img>
                         </Link>
                     </ul>
                 </div>
