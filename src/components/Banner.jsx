@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BackgroundImage1 from '../assets/bg-1.jpg'; // Adjust the path if needed
+import BackgroundImage1 from '../assets/bg-1.jpg';
 import BackgroundImage2 from '../assets/bg-2.jpg';
 import BackgroundImage3 from '../assets/bg-3.jpg';
 import BackgroundImage4 from '../assets/bg-4.jpg';

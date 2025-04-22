@@ -1,24 +1,44 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { incrementQuantity, decrementQuantity, removeFromCart } from '../redux/amazonSlice';
+import { MdDelete } from 'react-icons/md';
 
 const CartCard = ({ item }) => {
+    const dispatch = useDispatch();
+
     return (
         <div className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
             <div className="flex items-center space-x-4">
-                <img src={item.image} alt={item.title} className="w-20 h-20 object-cover rounded-md" />
+                <img className="w-24 h-24 object-cover rounded-md" src={item.image} alt={item.title} />
                 <div>
-                    <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
+                    <h3 className="text-lg font-semibold  text-gray-800">{item.title}</h3>
+                    <p className="text-gray-600 text-sm">${item.price} each</p>
                 </div>
             </div>
-            <div className="flex flex-col items-end">
-                <span className="text-xl font-semibold text-gray-800">${item.price}</span>
-                <div className="flex items-center space-x-2 mt-2">
-                    <button className="bg-red-500 text-white px-2 py-1 rounded-md">Remove</button>
-                    <input
-                        type="number"
-                        min="1"
-                        value={item.quantity}
-                        className="w-16 p-1 border rounded-md text-center"
-                    />
+            <div className="flex items-end flex-col gap-2">
+                <div className=''>
+                    <button
+                        onClick={() => dispatch(decrementQuantity(item._id))}
+                        className="mr-2 px-2 py-1 border hover:bg-gray-700 hover:text-white duration-300"
+                    >
+                        -
+                    </button>
+                    <span className="font-medium">{item.quantity}</span>
+                    <button
+                        onClick={() => dispatch(incrementQuantity(item._id))}
+                        className="ml-2 px-2 py-1 border hover:bg-gray-700 hover:text-white duration-300"
+                    >
+                        +
+                    </button>
+                </div>
+                <div className='flex gap-2'>
+                    <p className="text-lg font-semibold">${(item.price * item.quantity).toFixed(2)}</p>
+                    <button
+                        onClick={() => dispatch(removeFromCart(item._id))}
+                        className="text-red-800 hover:text-red-600"
+                    >
+                        <MdDelete size={20} />
+                    </button>
                 </div>
             </div>
         </div>
@@ -26,4 +46,3 @@ const CartCard = ({ item }) => {
 };
 
 export default CartCard;
-

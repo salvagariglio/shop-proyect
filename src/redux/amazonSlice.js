@@ -1,27 +1,59 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    productData:[],
-    userInfo: null,
-}
+    products: [],
+};
 
-export const amazonSlice = createSlice({
-    name:"amazon2.0",
+const amazonSlice = createSlice({
+    name: 'amazon',
     initialState,
-    reducers:{
-        addToCart:(state,action) => {
-            const item = state.productData.find(
-                (item)=> item._id === action.payload._id
-            )
+    reducers: {
+        addToCart: (state, action) => {
+            const itemIndex = state.products.findIndex(
+                (item) => item._id === action.payload._id
+            );
 
-            if(item){
-                item.quantity += action.payload.quantity
+            if (itemIndex >= 0) {
+                state.products[itemIndex].quantity += action.payload.quantity;
             } else {
-                state.productData.push(action.payload)
+                state.products.push(action.payload);
             }
         },
-    },
-})
+        removeFromCart: (state, action) => {
+            state.products = state.products.filter(
+                (item) => item._id !== action.payload
+            );
+        },
+        incrementQuantity: (state, action) => {
+            const itemIndex = state.products.findIndex(
+                (item) => item._id === action.payload
+            );
 
-export const {addToCart} = amazonSlice.actions
-export default amazonSlice.reducer
+            if (itemIndex >= 0) {
+                state.products[itemIndex].quantity += 1;
+            }
+        },
+        decrementQuantity: (state, action) => {
+            const itemIndex = state.products.findIndex(
+                (item) => item._id === action.payload
+            );
+
+            if (itemIndex >= 0 && state.products[itemIndex].quantity > 1) {
+                state.products[itemIndex].quantity -= 1;
+            }
+        },
+        clearCart: (state) => {
+            state.products = [];
+        },
+    },
+});
+
+export const {
+    addToCart,
+    removeFromCart,
+    incrementQuantity,
+    decrementQuantity,
+    clearCart,
+} = amazonSlice.actions;
+
+export default amazonSlice.reducer;
