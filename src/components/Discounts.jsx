@@ -1,54 +1,75 @@
-import React, {useState} from 'react'
-import Discounts1 from '../assets/discounts.png'
-import Discounts2 from '../assets/discounts2.png'
-import Discounts3 from '../assets/discounts3.png'
-import Discounts4 from '../assets/discounts4.png'
-import {BsChevronCompactLeft, BsChevronCompactRight} from 'react-icons/bs'
-import { RxDotFilled } from 'react-icons/rx'
+import { useRef } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
 
-const slides = [
-    { image: Discounts1},
-    { image: Discounts2},
-    { image: Discounts3},
-    { image: Discounts4}
-]
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import ProductsCard from './ProductsCard';
 
-const Discounts = () => {
-    const [currentIndex, setCurrentIndex]= useState(0)
-    
-    const prevSlide = () => {
-        const isFirstSlide = currentIndex === 0
-        const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1
-        setCurrentIndex(newIndex)
-    }
-    const nextSlide = () => {
-        const isLastSlide = currentIndex === slides.length - 1
-        const newIndex = isLastSlide ? 0 : currentIndex + 1
-        setCurrentIndex(newIndex)
-    }
-    const goToSlide = (slideIndex) => {
-        setCurrentIndex(slideIndex)
-    }
+const Discounts = ({ products }) => {
+
+    const prevRef = useRef(null);
+    const nextRef = useRef(null);
+    if (!Array.isArray(products) || products.length === 0) return null;
+
+    const newProducts = products.filter(item => item.isNew);
+    if (newProducts.length === 0) return null;
+
+    const shuffledProducts = [...newProducts].sort(() => Math.random() - 0.5);
+
+
 
     return (
-        <div className=' max-w-[1400px] h-[700px] w-full m-auto py-16 px-4 relative group'>
-            <div style={{backgroundImage:`url(${slides[0].image})`}} className=' w-full h-full rounded-2x1 bg-center duration-500'>
-            </div>
-            <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5  text-2x1 rounded-full p-2 bg-black/20 text-white cursor-pointer'>
-                <BsChevronCompactLeft onClick={prevSlide} size={30} />
-            </div>
-            <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2x1 rounded-full p-2 bg-black/20 text-white cursor-pointer'>
-                <BsChevronCompactRight onClick={nextSlide} size={30} />
-            </div>
-            <div className=' flex top-4 justify-center py-2 gap-5'>
-                {slides.map((slide, slideIndex) => (
-                    <div key={slideIndex} onClick={() => goToSlide(slideIndex)} className=' text-2x1 cursor-pointer'>
-                        <RxDotFilled size={25} />
-                    </div>
-                ))}
-            </div>
-        </div>
-    )
-}
+        <div className="relative py-10 max-w-screen-xl mx-auto px-4">
+            <h2 className="text-2xl font-bold mb-6 text-center">Discounts & New Arrivals</h2>
 
-export default Discounts
+            {/* Flechas fuera del carrusel */}
+            <div
+                ref={prevRef}
+                className="absolute -left-6 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-black hover:text-yellow-500 transition"
+            >
+                <FaArrowLeft size={30} />
+            </div>
+            <div
+                ref={nextRef}
+                className="absolute -right-6 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-black hover:text-yellow-500 transition"
+            >
+                <FaArrowRight size={30} />
+            </div>
+
+            <Swiper
+                modules={[Navigation, Autoplay]}
+                spaceBetween={20}
+                loop={true}
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                onSwiper={(swiper) => {
+                    setTimeout(() => {
+                        if (swiper.params?.navigation) {
+                            swiper.params.navigation.prevEl = prevRef.current;
+                            swiper.params.navigation.nextEl = nextRef.current;
+                            swiper.navigation.init();
+                            swiper.navigation.update();
+                        }
+                    });
+                }}
+
+                breakpoints={{
+                    320: { slidesPerView: 1 },
+                    640: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 },
+                    1280: { slidesPerView: 4 },
+                }}
+            >
+                {shuffledProducts.map(product => (
+                    <SwiperSlide key={product._id}>
+                        <ProductsCard product={product} />
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+        </div>
+    );
+};
+
+export default Discounts;

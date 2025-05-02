@@ -3,7 +3,7 @@ import Delivery from '../components/Delivery'
 
 const DeliveryPage = () => {
     return (
-        <div>
+        <div className='min-h-screen'>
             <Delivery />
         </div>
     )

@@ -9,7 +9,6 @@ const Product = () => {
     const dispatch = useDispatch();
     const [details, setDetails] = useState({});
     const [baseQty, setBaseQty] = useState(1);
-
     const location = useLocation();
 
     useEffect(() => {
@@ -17,83 +16,83 @@ const Product = () => {
     }, [location]);
 
     const handleAddToCart = () => {
-        dispatch(addToCart({
-            _id: details._id,
-            title: details.title,
-            image: details.image,
-            price: details.price,
-            quantity: baseQty,
-            description: details.description,
-            category: details.category,
-        }));
+        dispatch(
+            addToCart({
+                _id: details._id,
+                title: details.title,
+                image: details.image,
+                price: details.price,
+                quantity: baseQty,
+                description: details.description,
+                category: details.category,
+            })
+        );
         toast.success(`${details.title} added to cart`);
     };
 
     return (
-        <div>
-            <div className="max-w-screen-xl mx-auto my-10 flex gap-10">
-                <div className="w-2/5 relative">
+        <div className="min-h-screen px-4 py-10">
+            <div className="max-w-screen-xl mx-auto flex flex-col lg:flex-row gap-10">
+                {/* Imagen */}
+                <div className="w-full lg:w-2/5 flex justify-center">
                     <img
-                        className="w-full h-[550px] object-cover"
+                        className="w-full max-w-[400px] h-auto object-contain"
                         src={details.image}
                         alt="productImg"
                     />
                 </div>
 
-                <div className="w-3/5 flex flex-col justify-center gap-12">
+                {/* Detalles */}
+                <div className="w-full lg:w-3/5 flex flex-col justify-center gap-8">
                     <div>
-                        <h2 className="text-4xl font-semibold">{details.title}</h2>
-                        <div className="flex items-center gap-4 mt-3">
-                            <p className="line-through font-base text-gray-500">${details.oldPrice}</p>
-                            <p className="text-2xl font-medium text-gray-900">${details.price}</p>
+                        <h2 className="text-2xl sm:text-3xl font-semibold">{details.title}</h2>
+                        <div className="flex items-center gap-4 mt-2">
+                            <p className="line-through text-gray-500">${details.oldPrice}</p>
+                            <p className="text-xl font-medium text-gray-900">${details.price}</p>
                         </div>
                     </div>
 
                     <div className="flex items-center gap-2 text-base">
-                        <div className="flex">
-                            <MdOutlineStar />
-                            <MdOutlineStar />
-                            <MdOutlineStar />
-                            <MdOutlineStar />
-                            <MdOutlineStar />
+                        <div className="flex text-yellow-500 text-lg">
+                            <MdOutlineStar /><MdOutlineStar /><MdOutlineStar /><MdOutlineStar /><MdOutlineStar />
                         </div>
-                        <p className="text-xs text-gray-500">(1 Customer review)</p>
+                        <p className="text-sm text-gray-500">(1 Customer review)</p>
                     </div>
 
-                    <p className="text-base text-gray-500 -mt-3">{details.description}</p>
+                    <p className="text-base text-gray-600">{details.description}</p>
 
-                    <div className="flex gap-4">
-                        <div className="w-52 flex items-center justify-between text-gray-500 gap-4 border p-3">
-                            <p className="text-sm">Quantity</p>
-                            <div className="flex items-center gap-4 text-sm font-semibold">
+                    <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                        {/* Selector de cantidad */}
+                        <div className="flex items-center justify-between border p-3 rounded w-full sm:w-52 text-sm text-gray-600">
+                            <p>Quantity</p>
+                            <div className="flex items-center gap-3 font-semibold">
                                 <button
                                     onClick={() => setBaseQty(baseQty > 1 ? baseQty - 1 : 1)}
-                                    className="border h-5 font-normal text-lg flex items-center justify-center px-2 hover:bg-gray-700 hover:text-white cursor-pointer duration-300 active:bg-black"
+                                    className="border px-2 py-1 hover:bg-gray-700 hover:text-white duration-300"
                                 >
                                     -
                                 </button>
                                 <span>{baseQty}</span>
                                 <button
                                     onClick={() => setBaseQty(baseQty + 1)}
-                                    className="border h-5 font-normal text-lg flex items-center justify-center px-2 hover:bg-gray-700 hover:text-white cursor-pointer duration-300 active:bg-black"
+                                    className="border px-2 py-1 hover:bg-gray-700 hover:text-white duration-300"
                                 >
                                     +
                                 </button>
                             </div>
                         </div>
 
+                        {/* Botón de agregar */}
                         <button
                             onClick={handleAddToCart}
-                            className="bg-black text-white py-3 px-6 active:bg-gray-800"
+                            className="bg-black text-white px-6 py-3 w-full sm:w-auto hover:bg-gray-800 transition"
                         >
                             Add to Cart
                         </button>
                     </div>
 
-                    <p className="text-base text-gray-500">
-                        <span className="font-medium capitalize">
-                            Category: {details.category}
-                        </span>
+                    <p className="text-sm text-gray-500">
+                        <span className="font-medium capitalize">Category:</span> {details.category}
                     </p>
                 </div>
             </div>
