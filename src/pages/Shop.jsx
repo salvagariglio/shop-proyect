@@ -1,22 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { useLoaderData } from 'react-router-dom';
-import Products from '../components/Products';
-import Discounts from '../components/Discounts';
+// src/pages/Shop.jsx
+import React, { useState, useEffect } from 'react'
+import { useLoaderData } from 'react-router-dom'
+import Products from '../components/Products'
+import BuyNowSection from '../components/BuyNowSection'
+import portadaShop from '../assets/portada.jpg'
 
 const Shop = () => {
-    const data = useLoaderData();
-    const [products, setProducts] = useState([]);
+    const data = useLoaderData()
+    const [products, setProducts] = useState([])
 
     useEffect(() => {
-        setProducts(data);
-    }, [data]);
+        setProducts(data)
+    }, [data])
 
     return (
         <div>
-            <Discounts products={products} />
+
+
             <Products products={products} />
         </div>
-    );
-};
+    )
+}
 
-export default Shop;
+export default Shop
