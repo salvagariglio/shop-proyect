@@ -23,17 +23,17 @@ const Discounts = ({ products, category }) => {
     const slides = [...filtered].sort(() => Math.random() - 0.5)
 
     return (
-        <div className="relative max-w-screen-xl mx-auto px-4">
-            {/* Flechas fuera del carousel */}
+        <div className="relative w-full px-4 lg:px-4">
+            {/* Flechas dentro del carousel */}
             <div
                 ref={prevRef}
-                className="absolute -left-6 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-black hover:text-yellow-500 transition"
+                className="absolute border bg-white p-1.5 ml-auto rounded-full  left-4 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-black hover:text-yellow-500 transition"
             >
                 <FaArrowLeft size={30} />
             </div>
             <div
                 ref={nextRef}
-                className="absolute -right-6 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-black hover:text-yellow-500 transition"
+                className="absolute border bg-white p-1.5 mr-auto rounded-full right-4 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-black hover:text-yellow-500 transition"
             >
                 <FaArrowRight size={30} />
             </div>
@@ -44,7 +44,6 @@ const Discounts = ({ products, category }) => {
                 loop={true}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                 onSwiper={(swiper) => {
-                    // Asignamos refs a la navegación
                     setTimeout(() => {
                         if (swiper.params.navigation) {
                             swiper.params.navigation.prevEl = prevRef.current

@@ -1,5 +1,5 @@
 import Home from './pages/Home'
-import Header from './components/Header'
+import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import Product from './components/Product'
 import Cart from './pages/Cart'
@@ -13,11 +13,13 @@ import {
 } from 'react-router-dom'
 import { productsData } from './api/Api'
 import UserPage from './pages/UserPage'
+import Header from './components/Header'
 
 const Layout = () => {
   return (
     <>
       <Header />
+      <NavBar />
       <ScrollRestoration />
       <Outlet />
       <Footer />

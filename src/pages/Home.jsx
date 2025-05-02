@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import Discounts from '../components/Discounts'
 import BuyNowSection from '../components/BuyNowSection'
-import portadaHome from '../assets/portada.jpg'
+import portadaWomen from '../assets/portada1.jpg'
+import portadaJewllery from '../assets/portada2.jpg'
+import portadaTech from '../assets/portada3.jpg'
 
 const Home = () => {
     const data = useLoaderData()
@@ -14,9 +16,9 @@ const Home = () => {
     }, [data])
 
     return (
-        <div>
+        <div className='pb-20'>
             <BuyNowSection
-                imageSrc={portadaHome}
+                imageSrc={portadaWomen}
                 title="Encuentra lo que necesitas"
                 subtitle="Todo lo que buscás, lo tenés acá"
                 showButton={true}
@@ -26,7 +28,7 @@ const Home = () => {
             </div>
 
             <BuyNowSection
-                imageSrc={portadaHome}
+                imageSrc={portadaJewllery}
                 title="Encuentra lo que necesitas"
                 subtitle="Todo lo que buscás, lo tenés acá"
                 showButton={true}
@@ -35,7 +37,7 @@ const Home = () => {
                 <Discounts products={products} category='jewelery' />
             </div>
             <BuyNowSection
-                imageSrc={portadaHome}
+                imageSrc={portadaTech}
                 title="Encuentra lo que necesitas"
                 subtitle="Todo lo que buscás, lo tenés acá"
                 showButton={true}

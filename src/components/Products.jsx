@@ -15,7 +15,15 @@ const Products = ({ products }) => {
                     Shop with confidence and enjoy fast delivery, easy returns, and exceptional customer service.
                 </p>
             </div>
-            <div className='max-w-screen-xl mx-auto py-10 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+            <div
+                className="
+                max-w-screen-xl mx-auto 
+                py-10 
+                px-2 sm:px-4 
+                grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 
+                gap-4 sm:gap-6
+                "
+            >
                 {products.map((item) => (
                     <ProductsCard key={item._id} product={item} />
                 ))}

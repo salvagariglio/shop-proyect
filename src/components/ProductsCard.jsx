@@ -34,14 +34,17 @@ const ProductsCard = ({ product }) => {
 
     return (
         <div className="group relative">
-            <div onClick={handleDetails} className="w-full h-96 cursor-pointer overflow-hidden">
+            <div
+                onClick={handleDetails}
+                className="w-full cursor-pointer overflow-hidden h-48 sm:h-80 md:h-96"
+            >
                 <img
                     className="w-full h-full object-cover group-hover:scale-110 duration-500"
                     src={product.image}
                     alt={product.title}
                 />
             </div>
-            <div className="w-full border-[1px] px-2 py-4">
+            <div className="w-full px-2 py-4">
                 <div className="flex justify-between items-center">
                     <h2 className="font-titleFont text-base font-bold">
                         {product.title.substring(0, 15)}
